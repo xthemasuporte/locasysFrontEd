@@ -1,0 +1,197 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h5>Cadastro de Filmes</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-3 text-center">
+              <div class="row">
+                <div class="col-12">
+                  <img [src]="filme.imagem" class="w-100 p-2" />
+                </div>
+                <div class="col-12">
+                  <input
+                    type="file"
+                    id="image"
+                    hidden
+                    (change)="onFileChange($event)"
+                    #inputImage
+                  />
+                  <button
+                    class="btn btn-secondary w-100"
+                    (click)="inputImage.click()"
+                  >
+                    Escolher Imagem
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="row">
+                <div class="col-3">
+                  <label for="codigo" class="form-label">Codigo</label>
+                  <input
+                    type="text"
+                    id="cod"
+                    class="form-control"
+                    disabled=""
+                    [(ngModel)]="filme.codigo"
+                  />
+                </div>
+                <div class="col-3">
+                  <label for="codigo" class="form-label">Categoria</label>
+                  <div class="dropdown">
+                    <button
+                      class="btn btn-outline-secondary dropdown-toggle w-100"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      [disabled]="isLoading"
+                    >
+                      {{ filme.categoria }}
+                    </button>
+                    <ul class="dropdown-menu">
+                      @for (categoria of categorias; track $index) {
+                      <li>
+                        <a
+                          class="dropdown-item"
+                          (click)="setCategoria(categoria)"
+                          >{{ categoria }}</a
+                        >
+                      </li>
+                      }
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-7">
+                  <label for="codigo" class="form-label">Título</label>
+                  <input
+                    type="text"
+                    id="cod"
+                    class="form-control"
+                    [(ngModel)]="filme.titulo"
+                    [disabled]="isLoading"
+                  />
+                </div>
+                <div class="col-3">
+                  <label for="codigo" class="form-label"
+                    >Ano de Lancamento</label
+                  >
+                  <input
+                    type="number"
+                    id="ano"
+                    class="form-control"
+                    [(ngModel)]="filme.anoLancamento"
+                    [disabled]="isLoading"
+                  />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-3">
+                  <label for="codigo" class="form-label">Diretor</label>
+                  <input
+                    type="text"
+                    id="cod"
+                    class="form-control"
+                    [(ngModel)]="filme.diretor"
+                    [disabled]="isLoading"
+                  />
+                </div>
+                <div class="col-7">
+                  <label for="codigo" class="form-label"
+                    >Elenco Principal</label
+                  >
+                  <input
+                    type="text"
+                    id="ano"
+                    class="form-control"
+                    [(ngModel)]="filme.elencoPrincipal"
+                    [disabled]="isLoading"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <label for="codigo" class="form-label">Duração</label>
+                  <input
+                    type="number"
+                    id="cod"
+                    class="form-control"
+                    [(ngModel)]="filme.duracao"
+                    [disabled]="isLoading"
+                  />
+                </div>
+                <div class="col-3">
+                  <label for="codigo" class="form-label"
+                    >Classificação Indicativa</label
+                  >
+                  <div class="dropdown">
+                    <button
+                      class="btn btn-outline-secondary dropdown-toggle w-100"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      [disabled]="isLoading"
+                    >
+                      {{ filme.classificacaoIndicativa }}
+                    </button>
+                    <ul class="dropdown-menu">
+                      @for (classificacao of classificacoes; track $index) {
+                      <li>
+                        <a
+                          class="dropdown-item"
+                          (click)="setClassificacao(classificacao)"
+                          >{{ classificacao }}</a
+                        >
+                      </li>
+                      }
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <label for="codigo" class="form-label">Quantidade</label>
+                  <input
+                    type="number"
+                    id="cod"
+                    class="form-control"
+                    [disabled]="isLoading"
+                    [(ngModel)]="filme.quantidade"
+                  />
+                </div>
+                <div class="col-3">
+                  <label for="codigo" class="form-label">Disponíveis</label>
+                  <input
+                    type="number"
+                    id="ano"
+                    class="form-control"
+                    [disabled]="isLoading"
+                    [(ngModel)]="filme.quantidade_disponivel"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-end">
+          <button class="btn btn-primary" (click)="gravarFilme()">
+            @if(isLoading){
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Gravando... }@else { Gravar }
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

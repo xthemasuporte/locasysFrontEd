@@ -1,0 +1,90 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary p-3 ps-5 pe-5">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img
+        src="/assets/img/logo.png"
+        alt="Logo"
+        width="50"
+        class="d-inline-block align-text-top"
+      />
+      LocaSys - Sistema para Controle de Locação de Filmes
+    </a>
+    <form>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              [routerLink]="['/dashboard']"
+              >Dashboard</a
+            >
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Movimentação de Filmes
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" [routerLink]="['/alugarFilme']"
+                  >Locação</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" [routerLink]="['/receberFilme']"
+                  >Devolução</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Cadastros
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" [routerLink]="['/filme/lista']"
+                  >Filmes</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  onclick="javascript:alert('Não implementado')"
+                  >Usuarios</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="sair()">Sair</a>
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
+</nav>
+<router-outlet></router-outlet>

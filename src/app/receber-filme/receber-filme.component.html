@@ -1,0 +1,50 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h5>Devolução de Filmes</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <label for="codigo" class="form-label">Nome do Filme</label>
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                [(ngModel)]="filmeSelecionado"
+                [disabled]="isLoadingEfetivando"
+              >
+                @if(isLoadingLista){
+                <option value="">Carregando Lista de Filmes</option>
+                }@else {
+
+                <option value="">Selecione Um Filme</option>
+                } @for (filme of filmesAlugados; track $index) {
+                <option [value]="filme._id">
+                  {{ filme.titulo }} - Cod:{{ filme.codigo | number : "3." }}
+                </option>
+                }
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-end">
+          <button
+            class="btn btn-primary"
+            (click)="efetivarDevolucao()"
+            [disabled]="isLoadingEfetivando"
+          >
+            @if(isLoadingEfetivando){
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Efetivando... }@else { Efetivar Devolução }
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

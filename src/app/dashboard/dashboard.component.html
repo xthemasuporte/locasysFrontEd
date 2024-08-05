@@ -1,0 +1,231 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col">
+      <div class="accordion accordion-flush" id="relatorioLocacaoFilmes">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingOne">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseOne"
+              aria-expanded="false"
+              aria-controls="flush-collapseOne"
+            >
+              Filmes Alugados
+            </button>
+          </h2>
+          <div
+            id="flush-collapseOne"
+            class="accordion-collapse"
+            aria-labelledby="flush-headingOne"
+            data-bs-parent="#relatorioLocacaoFilmes"
+          >
+            <div class="accordion-body">
+              <table class="table table-stripped">
+                <thead class="table-dark">
+                  <tr>
+                    <th width="110px">Capa</th>
+                    <th width="100px">Codigo</th>
+                    <th>Nome</th>
+                    <th width="150px">Genero</th>
+                    <th width="120px">Qtd.</th>
+                    <th width="120px">Qtd. Alugada</th>
+                    <th width="120px">Disponível</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (filme of filmesAlugados; track $index) {
+                  <tr class="align-middle">
+                    <td><img [src]="filme.imagem" width="100px" /></td>
+                    <td>{{ filme.codigo | number : "3." }}</td>
+                    <td>{{ filme.titulo }}</td>
+                    <td>{{ filme.categoria }}</td>
+                    <td>{{ filme.quantidade }}</td>
+                    <td>
+                      {{ filme.quantidade - filme.quantidade_disponivel }}
+                    </td>
+                    <td>{{ filme.quantidade_disponivel }}</td>
+                  </tr>
+                  } @empty {
+                  <tr>
+                    <td colspan="8" class="text-center">
+                      @if (isLoadingAlugados){
+                      <div class="spinner-border" role="status"></div>
+                      }@else { Nenhum Filme Alugado }
+                    </td>
+                  </tr>
+                  }
+                </tbody>
+              </table>
+              <div class="text-end">
+                <button
+                  class="btn btn-primary"
+                  (click)="exportToCSV(filmesAlugados, 'filmes_alugados.csv')"
+                >
+                  @if(isLoadingGerandoCSV){
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Gerando... }@else { Exportar CSV }
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingTwo">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseTwo"
+              aria-expanded="false"
+              aria-controls="flush-collapseTwo"
+            >
+              Filmes Disponíveis
+            </button>
+          </h2>
+          <div
+            id="flush-collapseTwo"
+            class="accordion-collapse collapse"
+            aria-labelledby="flush-headingTwo"
+            data-bs-parent="#relatorioLocacaoFilmes"
+          >
+            <div class="accordion-body">
+              <table class="table table-stripped">
+                <thead class="table-dark">
+                  <tr>
+                    <th width="110px">Capa</th>
+                    <th width="100px">Codigo</th>
+                    <th>Nome</th>
+                    <th width="150px">Genero</th>
+                    <th width="120px">Qtd.</th>
+                    <th width="120px">Qtd. Alugada</th>
+                    <th width="120px">Disponível</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (filme of filmesDisponiveis; track $index) {
+                  <tr class="align-middle">
+                    <td><img [src]="filme.imagem" width="100px" /></td>
+                    <td>{{ filme.codigo | number : "3." }}</td>
+                    <td>{{ filme.titulo }}</td>
+                    <td>{{ filme.categoria }}</td>
+                    <td>{{ filme.quantidade }}</td>
+                    <td>
+                      {{ filme.quantidade - filme.quantidade_disponivel }}
+                    </td>
+                    <td>{{ filme.quantidade_disponivel }}</td>
+                  </tr>
+                  } @empty {
+                  <tr>
+                    <td colspan="7" class="text-center">
+                      @if (isLoadingDisponiveis){
+                      <div class="spinner-border" role="status"></div>
+                      }@else { Nenhum Filme Disponível }
+                    </td>
+                  </tr>
+                  }
+                </tbody>
+              </table>
+              <div class="text-end">
+                <button
+                  class="btn btn-primary"
+                  (click)="
+                    exportToCSV(filmesDisponiveis, 'filmes_disponiveis.csv')
+                  "
+                >
+                  @if(isLoadingGerandoCSV){
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Gerando... }@else { Exportar CSV }
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingThree">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseThree"
+              aria-expanded="false"
+              aria-controls="flush-collapseThree"
+            >
+              Filmes Indisponíveis
+            </button>
+          </h2>
+          <div
+            id="flush-collapseThree"
+            class="accordion-collapse collapse"
+            aria-labelledby="flush-headingThree"
+            data-bs-parent="#relatorioLocacaoFilmes"
+          >
+            <div class="accordion-body">
+              <table class="table table-stripped">
+                <thead class="table-dark">
+                  <tr>
+                    <th width="110px">Capa</th>
+                    <th width="100px">Codigo</th>
+                    <th>Nome</th>
+                    <th width="150px">Genero</th>
+                    <th width="120px">Qtd.</th>
+                    <th width="120px">Qtd. Alugada</th>
+                    <th width="120px">Disponível</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (filme of filmesIndisponiveis; track $index) {
+                  <tr class="align-middle">
+                    <td><img [src]="filme.imagem" width="100px" /></td>
+                    <td>{{ filme.codigo | number : "3." }}</td>
+                    <td>{{ filme.titulo }}</td>
+                    <td>{{ filme.categoria }}</td>
+                    <td>{{ filme.quantidade }}</td>
+                    <td>
+                      {{ filme.quantidade - filme.quantidade_disponivel }}
+                    </td>
+                    <td>{{ filme.quantidade_disponivel }}</td>
+                  </tr>
+                  } @empty {
+                  <tr>
+                    <td colspan="7" class="text-center">
+                      @if (isLoadingIndisponiveis){
+                      <div class="spinner-border" role="status"></div>
+                      }@else { Nenhum Filme Indisponível }
+                    </td>
+                  </tr>
+                  }
+                </tbody>
+              </table>
+              <div class="text-end">
+                <button
+                  class="btn btn-primary"
+                  (click)="
+                    exportToCSV(filmesIndisponiveis, 'filmes_indisponiveis.csv')
+                  "
+                >
+                  @if(isLoadingGerandoCSV){
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Gerando... }@else { Exportar CSV }
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

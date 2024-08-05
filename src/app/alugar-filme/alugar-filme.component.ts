@@ -35,6 +35,12 @@ export class AlugarFilmeComponent implements OnInit {
   }
 
   efetivarLocacao() {
+    if (this.filmeSelecionado == '' || this.diasLocacao <= 0) {
+      alert(
+        'Você precisa escolher um filme e um período maior do que zero para locação'
+      );
+      return;
+    }
     this.isLoadingEfetivando = true;
     this.serviceApi
       .locacaoDeFilme(this.filmeSelecionado, this.diasLocacao)

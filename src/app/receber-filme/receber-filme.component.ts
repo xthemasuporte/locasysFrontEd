@@ -34,6 +34,10 @@ export class ReceberFilmeComponent implements OnInit {
   }
 
   efetivarDevolucao() {
+    if (this.filmeSelecionado == '') {
+      alert('Você precisa escolher um filme para devolução');
+      return;
+    }
     this.isLoadingEfetivando = true;
     this.serviceApi.devolucaoDeFilme(this.filmeSelecionado).subscribe({
       next: (data: any) => {
